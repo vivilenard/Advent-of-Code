@@ -1,0 +1,12 @@
+1. create an array containing all lists of numbers (again as array) on the left side
+2. do the same for the right pile
+3. sort the lists within the piles from lowest to highest
+4. compare each list of right and left pile with each other
+    & store the difference in a new array
+5. count the total difference
+
+
+OR 
+
+1. create an array of size 2 for each line
+2. iterate through all arrays: sort each member 
