@@ -1,4 +1,6 @@
 import copy
+
+
 def numberLength(section):
     j = 0
     for char in section:
@@ -17,7 +19,7 @@ def isValidNumber(section, numbers):
 
 def extractNumbers(section):
     numbers = []
-    print(section)
+    print('mul', section)
     i = 0
     if (section[i] == '('):
         i += 1
@@ -39,20 +41,39 @@ def extractNumbers(section):
 def multiply(numbers):
     return numbers[0] * numbers[1]
 
+def checkDo(section):
+    global do
+    lastIndexDo = section.rfind("do()")
+    lastIndexDont = section.rfind("don't()")
+    if lastIndexDo > lastIndexDont:
+        do = True
+        print('DO:', do)
+    elif lastIndexDo < lastIndexDont:
+        do = False
+        print('DO:', do)
+    return
+
+do = True
+Task = 1 #for second task set to 2
+
+
 def parseNumbers(filePath):
+    global do
     with open(filePath, "r") as f:
         content = f.read()
     
     sum = 0
     muls = content.split('mul')
-    print(muls)
+    # print(muls)
     for section in muls:
-        numbers = extractNumbers(section)
-        print(numbers)
-        if not numbers:
-            continue
-        sum += multiply(numbers)
+        if do:
+            numbers = extractNumbers(section)
+            if numbers: print(numbers)
+        if do and numbers:
+            sum += multiply(numbers)
+        if Task == 2:     # only check for dos in second task
+            checkDo(section)
     return sum
     
-print(parseNumbers("input.txt"))
+print('\033[33m', parseNumbers("input.txt"), '\033[0m')
 
